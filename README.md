@@ -2,7 +2,7 @@
 
 Tutorial "Local Library" website written in Django.
 
-For detailed information about this project see the associated 
+For detailed information about this project see the associated : https://github.com/sowmyasat0291/django_local_library.git
 ## Overview
 
 This web application creates an online catalog for a small local library, where users can browse available books and manage their accounts.
