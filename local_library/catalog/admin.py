@@ -50,6 +50,12 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_genre')
     inlines = [BooksInstanceInline]
 
+    def display_genre(self, obj):
+        """Create a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join(genre.name for genre in obj.genre.all()[:3])
+    
+    display_genre.short_description = 'Genre'
+
 
 admin.site.register(Book, BookAdmin)
 
@@ -62,14 +68,24 @@ class BookInstanceAdmin(admin.ModelAdmin):
      - filters that will be displayed in sidebar (list_filter)
      - grouping of fields into sections (fieldsets)
     """
-    list_display = ('book', 'status', 'borrower', 'due_back', 'id')
+    list_display = ('book', 'imprint', 'id', 'borrower', 'status', 'due_back')
     list_filter = ('status', 'due_back')
-
     fieldsets = (
         (None, {
             'fields': ('book', 'imprint', 'id')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back', 'borrower')
+            'fields': ('status', 'due_back')
         }),
     )
+
+
+
+
+
+
+
+
+
+
+
