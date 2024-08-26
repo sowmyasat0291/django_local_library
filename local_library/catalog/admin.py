@@ -62,13 +62,7 @@ admin.site.register(Book, BookAdmin)
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    """Administration object for BookInstance models.
-    Defines:
-     - fields to be displayed in list view (list_display)
-     - filters that will be displayed in sidebar (list_filter)
-     - grouping of fields into sections (fieldsets)
-    """
-    list_display = ('book', 'imprint', 'id', 'borrower', 'status', 'due_back')
+    list_display = ('id', 'book', 'status', 'due_back')
     list_filter = ('status', 'due_back')
     fieldsets = (
         (None, {
@@ -78,6 +72,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
             'fields': ('status', 'due_back')
         }),
     )
+
 
 
 
