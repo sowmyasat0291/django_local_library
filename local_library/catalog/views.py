@@ -46,6 +46,12 @@ def about_view(request):
     return HttpResponse("This is the about page.")
 """
 # Create your views here.
+class BookListView(ListView):
+    model = Book
+    template_name = 'catalog/book_list.html'
+    context_object_name = 'books'
+    paginate_by = 2  # Number of books per page
+"""
 class BookListView(generic.ListView):
     model = Book
     paginate_by = 2
@@ -55,6 +61,7 @@ class BookListView(generic.ListView):
         # Create any data and add it to the context
         context['some_data'] = 'This is just some data'
         return context
+"""
 class BookDetailView(generic.DetailView):
     model = Book
     def book_detail_view(request, primary_key):

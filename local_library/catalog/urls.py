@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import BookListView
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -8,6 +10,8 @@ urlpatterns = [
     path('authors/', views.AuthorListView.as_view(), name='authors'),
     path('author/<int:pk>',
          views.AuthorDetailView.as_view(), name='author-detail'),
+    path('books/', BookListView.as_view(), name='book-list'),
+
 
 
     #path('', views.home_view, name='home'),  # Maps the root URL to home_view
