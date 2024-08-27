@@ -4,6 +4,7 @@ from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Book, Author, BookInstance, Genre
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def author_detail(request, pk):
     author = get_object_or_404(Author, pk=pk)
@@ -76,5 +77,18 @@ class AuthorDetailView(DetailView):
     model = Author
     template_name = 'catalog/author_detail.html'  # Optional: specify your template
     context_object_name = 'author'  # Optional: name to use in the template
+class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
+    """Generic class-based view listing books on loan to current user."""
+    model = BookInstance
+    template_name = 'catalog/bookinstance_list_borrowed_user.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return (
+            BookInstance.objects.filter(borrower=self.request.user)
+            .filter(status__exact='o')
+            .order_by('due_back')
+        )
+
 
 

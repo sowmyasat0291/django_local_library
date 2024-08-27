@@ -62,14 +62,14 @@ admin.site.register(Book, BookAdmin)
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'book', 'status', 'due_back')
+    list_display = ('id', 'book', 'status', 'borrower', 'due_back')
     list_filter = ('status', 'due_back')
     fieldsets = (
         (None, {
             'fields': ('book', 'imprint', 'id')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back')
+            'fields': ('status', 'due_back', 'borrower')
         }),
     )
 
