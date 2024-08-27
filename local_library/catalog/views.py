@@ -2,7 +2,7 @@ from django.shortcuts import render
 #from django.http import HttpResponse
 from django.views import generic
 from django.shortcuts import get_object_or_404
-
+from django.views.generic import ListView, DetailView
 from .models import Book, Author, BookInstance, Genre
 
 def author_detail(request, pk):
@@ -42,6 +42,7 @@ def about_view(request):
 # Create your views here.
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 2
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
         context = super(BookListView, self).get_context_data(**kwargs)
@@ -53,4 +54,14 @@ class BookDetailView(generic.DetailView):
     def book_detail_view(request, primary_key):
      book = get_object_or_404(Book, pk=primary_key)
      return render(request, 'catalog/book_detail.html', context={'book': book})
+class AuthorListView(ListView):
+    model = Author
+    template_name = 'catalog/author_list.html'  # Optional: specify your template
+    context_object_name = 'author_list'  # Optional: name to use in the template
+    paginate_by = 10  # Optional: add pagination if you have many authors
+class AuthorDetailView(DetailView):
+    model = Author
+    template_name = 'catalog/author_detail.html'  # Optional: specify your template
+    context_object_name = 'author'  # Optional: name to use in the template
+
 
