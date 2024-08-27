@@ -5,10 +5,12 @@ from .views import BookListView, BookDetailView, AuthorListView, AuthorDetailVie
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('books/', BookListView.as_view(), name='book-list'),  # Use a single entry for the books list view
-    path('book/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
-    path('authors/', AuthorListView.as_view(), name='author-list'),
-    path('author/<int:pk>/', AuthorDetailView.as_view(), name='author-detail'),
+    path('books/', views.BookListView.as_view(), name='books'),
+    path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
+    path('authors/', views.AuthorListView.as_view(), name='authors'),
+    path('author/<int:pk>',
+         views.AuthorDetailView.as_view(), name='author-detail'),
+    path('books/', BookListView.as_view(), name='book-list'),
 
 
 
