@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from .models import Book, Author, BookInstance, Genre
 
 def index(request):
@@ -25,7 +25,7 @@ def index(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
-
+"""
 def home_view(request):
     return HttpResponse("Welcome to the home page!")
 
@@ -33,3 +33,4 @@ def about_view(request):
     return HttpResponse("This is the about page.")
 
 # Create your views here.
+"""
