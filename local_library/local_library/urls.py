@@ -22,6 +22,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls')),  # Include catalog app's URL configuration
     path('', RedirectView.as_view(url='catalog/', permanent=True)),  # Redirect to catalog app on root URL
+    path('catalog/', include('catalog.urls')),  # Include catalog app's URL configuration
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # Serve static files during development
