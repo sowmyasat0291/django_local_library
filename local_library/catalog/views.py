@@ -1,10 +1,11 @@
 from django.shortcuts import render
 #from django.http import HttpResponse
-from django.views import generic
+from django.views import View, generic
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Book, Author, BookInstance, Genre
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 def author_detail(request, pk):
     author = get_object_or_404(Author, pk=pk)
@@ -77,6 +78,9 @@ class AuthorDetailView(DetailView):
     model = Author
     template_name = 'catalog/author_detail.html'  # Optional: specify your template
     context_object_name = 'author'  # Optional: name to use in the template
+class MyView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
 class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
     """Generic class-based view listing books on loan to current user."""
     model = BookInstance
